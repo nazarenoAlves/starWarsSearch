@@ -10,6 +10,10 @@ function Table() {
     operator: 'maior que',
     number: 0,
   });
+  const [column, setColumn] = useState(['population', 'orbital_period', 'diameter',
+    'rotation_period', 'surface_water']);
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+
   useEffect(() => {
     setResultSearch(data);
     console.log(data);
@@ -20,28 +24,40 @@ function Table() {
       [target.name]: target.value,
     });
   };
+  // const filterColumn = () => {
+
+  // };
 
   const handleClick = () => {
-    switch (inputsFilter.operator) {
-    case 'maior que':
-      return setResultSearch(resultSearch
-        .filter((el) => +el[inputsFilter.column] > +inputsFilter.number));
-    case 'menor que':
-      return setResultSearch(resultSearch
-        .filter((el) => +el[inputsFilter.column] < +inputsFilter.number));
-    case 'igual a':
-      return setResultSearch(resultSearch
-        .filter((el) => +el[inputsFilter.column] === +inputsFilter.number));
-    default:
-      break;
-    }
+    setFilterByNumericValues([...filterByNumericValues, inputsFilter]);
+    setColumn(column.filter((el) => el !== inputsFilter.column));
   };
 
   useEffect(() => {
     const resultFilterSearch = data.filter((elePlanet) => elePlanet.name.toLowerCase()
       .includes(search.toLowerCase()));
     setResultSearch(resultFilterSearch);
-  }, [data, search]);
+    filterByNumericValues.forEach((item) => {
+      switch (item.operator) {
+      case 'maior que':
+        return setResultSearch(resultSearch
+          .filter((el) => +el[item.column] > +item.number));
+      case 'menor que':
+        return setResultSearch(resultSearch
+          .filter((el) => +el[item.column] < +item.number));
+      case 'igual a':
+        return setResultSearch(resultSearch
+          .filter((el) => +el[item.column] === +item.number));
+      default:
+        break;
+      }
+    });
+
+    setInputsFilter({
+      ...inputsFilter,
+      column: column[0],
+    });
+  }, [data, search, column, filterByNumericValues]);
   return (
     <div>
       <form>
@@ -61,11 +77,9 @@ function Table() {
             onChange={ handleChange }
             name="column"
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            {column.map((el, index) => (
+              <option key={ index }>{el}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="operator">
