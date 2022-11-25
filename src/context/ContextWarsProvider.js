@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ContextWars from './ContextWars';
 import fetchApi from '../services/fetchApi';
 
-function ContextWarsProvider({ children }) {
+export default function ContextWarsProvider({ children }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     async function fetchWars() {
@@ -25,5 +25,3 @@ function ContextWarsProvider({ children }) {
 ContextWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default ContextWarsProvider;

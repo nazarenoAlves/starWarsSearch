@@ -13,10 +13,12 @@ function Table() {
   const [column, setColumn] = useState(['population', 'orbital_period', 'diameter',
     'rotation_period', 'surface_water']);
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const optionsColumn = ['population', 'orbital_period', 'diameter',
+    'rotation_period', 'surface_water'];
+  const [stateAtt, setStateAtt] = useState(0);
 
   useEffect(() => {
     setResultSearch(data);
-    console.log(data);
   }, [data]);
   const handleChange = ({ target }) => {
     setInputsFilter({
@@ -31,6 +33,16 @@ function Table() {
   const handleClick = () => {
     setFilterByNumericValues([...filterByNumericValues, inputsFilter]);
     setColumn(column.filter((el) => el !== inputsFilter.column));
+  };
+
+  const removeFilter = (item) => {
+    setResultSearch(data);
+    const filterDelet = filterByNumericValues.filter((ele) => ele.column !== item.column);
+    console.log(filterDelet);
+    const restoreOptions = optionsColumn.filter((el) => el === item.column);
+    setFilterByNumericValues(filterDelet);
+    setColumn([...column, restoreOptions]);
+    setStateAtt(stateAtt + 1);
   };
 
   useEffect(() => {
@@ -52,12 +64,20 @@ function Table() {
         break;
       }
     });
+  }, [data, search, filterByNumericValues, stateAtt]);
 
+  useEffect(() => {
     setInputsFilter({
       ...inputsFilter,
       column: column[0],
     });
-  }, [data, search, column, filterByNumericValues]);
+  }, [column]);
+
+  const removeAllFilters = () => {
+    setFilterByNumericValues([]);
+    setColumn(optionsColumn);
+  };
+
   return (
     <div>
       <form>
@@ -111,6 +131,31 @@ function Table() {
 
         </button>
       </form>
+      <div>
+        {filterByNumericValues.map((ele, index) => (
+          <div
+            key={ index }
+            data-testid="filter"
+          >
+            {`${ele.column} ${ele.operator} ${ele.number}`}
+            <button
+              type="button"
+              onClick={ () => removeFilter(ele) }
+            >
+              X
+            </button>
+          </div>
+        ))}
+        <div>
+          <button
+            type="button"
+            data-testid="button-remove-filters"
+            onClick={ removeAllFilters }
+          >
+            Remove All Filter
+          </button>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
