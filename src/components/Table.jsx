@@ -89,7 +89,6 @@ function Table() {
           onChange={ ({ target }) => setSearch(target.value) }
         />
         <label htmlFor="column">
-          Coluna
           <select
             data-testid="column-filter"
             id="column"
@@ -178,7 +177,7 @@ function Table() {
           {
             resultSearch.map((item) => (
               <tr key={ item.name }>
-                <td>{item.name}</td>
+                <td data-testid="planet-name">{item.name}</td>
                 <td>{item.rotation_period}</td>
                 <td>{item.orbital_period}</td>
                 <td>{item.diameter}</td>
@@ -191,9 +190,9 @@ function Table() {
                   {item.films
                     .map((film, index) => <p key={ `${film}-${index}` }>{film}</p>)}
                 </td>
-                <td>{item.name}</td>
-                <td>{item.name}</td>
-                <td>{item.name}</td>
+                <td>{item.created}</td>
+                <td>{item.edited}</td>
+                <td>{item.url}</td>
               </tr>
             ))
           }
