@@ -1,10 +1,26 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Star Wars Search
+Este é um projeto desenvolvido durante o curso da Trybe, que consiste em uma aplicação que busca e lista planetas do universo de StarWars, utilizando a API pública SWAPI.
+
+## Funcionalidades
+Buscar  planetas por nome
+Visualizar informações detalhadas sobre cada item encontrado, como filmes em que aparece, características físicas, etc.
+Tecnologias utilizadas
+__React__
+__Redux__
+__CSS__
+__SWAPI (API Star Wars)__
+### Como executar o projeto
+Clone o repositório:
+
+git clone https://github.com/nazarenoAlves/starWarsSearch.git
+
+Instale as dependências:
+
+npm install
+Inicie a aplicação:
+
+
+npm start
+
+Licença
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para detalhes.
