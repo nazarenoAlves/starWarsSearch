@@ -6,7 +6,7 @@ Buscar  planetas por nome
 Visualizar informações detalhadas sobre cada item encontrado, como filmes em que aparece, características físicas, etc.
 Tecnologias utilizadas
 __React__
-__Redux__
+__ContextAPI__
 __CSS__
 __SWAPI (API Star Wars)__
 ### Como executar o projeto
